@@ -18,5 +18,3 @@ target_link_libraries(${TEST_LIB_NAME} PRIVATE "${LIB_NAME}" Catch2::Catch2)
 # If you register a test, then ctest and make test will run it.
 # You can also run examples and check the output, as well.
 add_test(NAME testlibtest COMMAND ${TEST_LIB_NAME}) # Command can be a target
-
-#add_custom_command(TARGET ${TEST_APP_NAME} COMMAND ./${TEST_APP_NAME} POST_BUILD)
