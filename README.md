@@ -1,47 +1,53 @@
-This is an example project using CMake heavily based on https://cliutils.gitlab.io/modern-cmake/
+# Extended Kalman Filter Project
 
-The requirements are:
+> C++ project which is a solution to the Extended Kalman Filter project of Udacity's Self Driving Car Engineer Nano Degree. This document covers how the project has been setup.
 
-* CMake 3.11 or better; 3.14+ highly recommended.
-* A C++17 compatible compiler
-* The Boost libararies (header only part is fine)
-* Git
-* Doxygen (optional)
+## Prerequisites
 
-To configure:
+! Read the whole readme through first
 
-```bash
-cmake -S . -B build
-```
+- [cmake version 3.19.1 installation](https://cmake.org/install/)
+- [SDCE Term 2 simulator](https://github.com/udacity/self-driving-car-sim/releases)
 
-Add `-GNinja` if you have Ninja.
+## Build and Run
 
-To build:
+In the root directory run
 
 ```bash
+cmake -S . -B build -DEigen3_DIR=(pwd)/extern/eigen/cmake
 cmake --build build
 ```
 
-To test (`--target` can be written as `-t` in CMake 3.15+):
+then either run executable
+
+```bash
+./bin/KalmanExtended_APP
+```
+
+or tests (needs build of test target)
 
 ```bash
 cmake --build build --target test
+./bin/KalmanExtended_LIB_TESTS
 ```
 
-To build docs (requires Doxygen, output in `build/docs/html`):
+## Dependencies
 
-```bash
-cmake --build build --target docs
-```
+- [Eigen](https://eigen.tuxfamily.org/dox-devel/index.html) as 'production' dependency
+- [Catch2](https://github.com/catchorg/Catch2.git) as testing/development dependency
 
-To use an IDE, such as Xcode:
+Eigen was added to the project by using `git submodule add https://gitlab.com/libeigen/eigen.git <external>` and then adding required config to `CMakeLists.txt`. See running section for making it available to build step.
 
-```bash
-cmake -S . -B xbuild -GXcode
-cmake --open xbuild
-```
+The adding of [submodules](https://git-scm.com/book/en/v2/Git-Tools-Submodules) after cloning is typically done once with `git submodule update --init` ran from the project root directory.
 
-The CMakeLists show off several useful design patters for CMake.
+[Catch2](https://github.com/catchorg/Catch2.git) is fetched automatically via the configuration supplied in `tests/CMakeLists.txt`
 
-add submodules with
-git submodule add ../../owner/repo.git extern/repo
+## Resources
+
+- [Kalman Filter tutorial](https://www.kalmanfilter.net/)
+- [CMake dependency handling](https://foonathan.net/2016/07/cmake-dependency-handling/)
+- [CMake tutorial](https://cmake.org/cmake/help/latest/guide/tutorial/index.html)
+- [Eigen and CMake](http://eigen.tuxfamily.org/dox/TopicCMakeGuide.html)
+- [Mac, wchar issue](https://mhmethun.wordpress.com/2018/11/23/how-to-fix-c-cwchar-fatal-error-wchar-h-no-such-file-or-directory/)
+- [Unit testing harness](https://wingman-sw.com/articles/tdd-legacy-c)
+- [Doxygen](https://www.doxygen.nl/manual/docblocks.html)
