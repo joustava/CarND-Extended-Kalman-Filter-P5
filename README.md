@@ -45,9 +45,11 @@ The adding of [submodules](https://git-scm.com/book/en/v2/Git-Tools-Submodules) 
 ## Resources
 
 - [Kalman Filter tutorial](https://www.kalmanfilter.net/)
+- [Kalman FIlter Wikipedia](https://en.wikipedia.org/wiki/Kalman_filter)
 - [CMake dependency handling](https://foonathan.net/2016/07/cmake-dependency-handling/)
 - [CMake tutorial](https://cmake.org/cmake/help/latest/guide/tutorial/index.html)
 - [Eigen and CMake](http://eigen.tuxfamily.org/dox/TopicCMakeGuide.html)
+- [Eigen tutorial](https://dritchie.github.io/csci2240/assignments/eigen_tutorial.pdf)
 - [Mac, wchar issue](https://mhmethun.wordpress.com/2018/11/23/how-to-fix-c-cwchar-fatal-error-wchar-h-no-such-file-or-directory/)
 - [Unit testing harness](https://wingman-sw.com/articles/tdd-legacy-c)
 - [Doxygen](https://www.doxygen.nl/manual/docblocks.html)

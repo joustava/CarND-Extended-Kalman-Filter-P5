@@ -1,6 +1,5 @@
-#define CATCH_CONFIG_MAIN
 #include <catch2/catch.hpp>
-#include <modern/lib.hpp>
+#include <utils/cli.hpp>
 
 using Eigen::MatrixXd; 
 

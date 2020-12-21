@@ -3,11 +3,15 @@
 
 # Optionally glob, but only for CMake 3.12 or later:
 # file(GLOB HEADER_LIST CONFIGURE_DEPENDS "${ModernCMakeExample_SOURCE_DIR}/include/modern/*.hpp")
-set(HEADER_LIST "${CMAKE_SOURCE_DIR}/include/modern/lib.hpp")
+set(
+  HEADER_LIST 
+  "${CMAKE_SOURCE_DIR}/include/utils/cli.hpp"
+  "${CMAKE_SOURCE_DIR}/include/kalman/filter.hpp"
+)
 
 
 # Make an automatic library - will be static or dynamic based on user setting
-add_library("${LIB_NAME}" lib.cpp ${HEADER_LIST})
+add_library("${LIB_NAME}" utils/cli.cpp kalman/filter.cpp ${HEADER_LIST})
 
 # We need this directory, and users of our library will need it too.
 # bin dir included to pick up generated version.h
