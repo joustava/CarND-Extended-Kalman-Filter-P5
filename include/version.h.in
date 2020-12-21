@@ -1,0 +1,4 @@
+// Header template for passing in project configurations from CMake config.
+#define KalmanExtended_VERSION_MAJOR @KalmanExtended_VERSION_MAJOR@
+#define KalmanExtended_VERSION_MINOR @KalmanExtended_VERSION_MINOR@
+#define KalmanExtended_VERSION_PATCH @KalmanExtended_VERSION_PATCH@
