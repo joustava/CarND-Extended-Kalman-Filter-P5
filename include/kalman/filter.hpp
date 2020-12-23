@@ -20,7 +20,7 @@ class Kalman {
   MatrixXd Ht;// the observation/measurement model transpose
   MatrixXd R;	// the covariance of the observation/measurment noise
   MatrixXd I; // Identity matrix
-  MatrixXd Q;	// the covariance of the process noise
+  MatrixXd Q;	// the covariance of the process noise (TODO:   make configurable)
 
   MatrixXd S;
   MatrixXd y;
