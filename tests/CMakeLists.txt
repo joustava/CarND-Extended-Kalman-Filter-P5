@@ -11,7 +11,7 @@ add_executable(${TEST_LIB_NAME}
   support.cpp
   kalman/kalman_tests.cpp
   utils/cli_tests.cpp
-  utils/bus_tests.cpp
+  utils/sampler_tests.cpp
   )
 # add_executable(${TEST_LIB_NAME}_utils
 #   support.cpp

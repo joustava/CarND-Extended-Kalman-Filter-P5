@@ -1,4 +1,4 @@
-#include <sensors/bus.hpp>
+#include <sensors/sampler.hpp>
 #include <string>
 #include <fstream>
 #include <istream>
@@ -13,16 +13,16 @@ std::istream &operator>>(std::istream &is, line &l) {
     return is;
 }
 
-SensorBus::SensorBus(std::string in_file_name) {
+Sampler::Sampler(std::string in_file_name) {
   in_file = std::ifstream();
   in_file.open(in_file_name);
 }
  
-bool SensorBus::is_available() {
+bool Sampler::is_available() {
   return in_file.is_open();
 }
 
-bool SensorBus::read(std::string &dst) {
+bool Sampler::read(std::string &dst) {
    std::getline(in_file, dst);
    return !!in_file;
 }

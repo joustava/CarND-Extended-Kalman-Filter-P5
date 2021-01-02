@@ -14,7 +14,7 @@ set(
 add_library("${LIB_NAME}"
   utils/cli.cpp
   kalman/filter.cpp 
-  sensors/bus.cpp
+  sensors/sampler.cpp
   ${HEADER_LIST}
 )
 

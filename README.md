@@ -42,6 +42,12 @@ The adding of [submodules](https://git-scm.com/book/en/v2/Git-Tools-Submodules) 
 
 [Catch2](https://github.com/catchorg/Catch2.git) is fetched automatically via the configuration supplied in `tests/CMakeLists.txt`
 
+## Contributing
+
+We follow the [Google C++ Style Guide](https://google.github.io/styleguide/cppguide.html) as close as possible and use [clang-format](https://clang.llvm.org/docs/ClangFormat.html) to validate our code accordingly.
+
+Tests live in `./tests` folder and we aim to not reduce coverage so please add tests for your code or changes.
+
 ## Resources
 
 - [Kalman Filter tutorial](https://www.kalmanfilter.net/)

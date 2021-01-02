@@ -1,19 +1,19 @@
 #include <catch2/catch.hpp>
 
-#include <sensors/bus.hpp>
+#include <sensors/sampler.hpp>
 #include <sensors/sample.hpp>
 #include <iostream>
 
-SCENARIO("receiving samples", "[bus]") {
+SCENARIO("obtaining samples", "[sampler]") {
   std::vector<Sample> samples; // destination
-  SensorBus bus = SensorBus();// source
+  Sampler bus = Sampler();// source
 
-  GIVEN("An existing bus is opened") {
+  GIVEN("An existing sampler is created") {
     if (!bus.is_available()) {
       INFO("Cannot open bus: ");
     }
     
-    WHEN("The bus is read") {
+    WHEN("The sampler is reading") {
 
       std::string package;
 
@@ -55,10 +55,8 @@ SCENARIO("receiving samples", "[bus]") {
 
       }
 
-      // Hold the button here
-      THEN("we end up with a sample")
+      THEN("it creates structured samples")
       {
-        // Check that the power is off now.
         REQUIRE(samples.size() == 1);
       }
     }
