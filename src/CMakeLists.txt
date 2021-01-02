@@ -11,7 +11,12 @@ set(
 
 
 # Make an automatic library - will be static or dynamic based on user setting
-add_library("${LIB_NAME}" utils/cli.cpp kalman/filter.cpp ${HEADER_LIST})
+add_library("${LIB_NAME}"
+  utils/cli.cpp
+  kalman/filter.cpp 
+  sensors/bus.cpp
+  ${HEADER_LIST}
+)
 
 # We need this directory, and users of our library will need it too.
 # bin dir included to pick up generated version.h

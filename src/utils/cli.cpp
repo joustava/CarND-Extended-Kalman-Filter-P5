@@ -1,7 +1,7 @@
+#include <iostream>
 #include <utils/cli.hpp>
 #include "version.h"
 
-#include <iostream>
 using Eigen::MatrixXd;
 
 bool usage(int argc, char* argv[]) {

@@ -27,7 +27,7 @@ then either run executable
 or tests (needs build of test target)
 
 ```bash
-cmake --build build --target test
+# Is this needed? cmake --build build --target test
 ./bin/KalmanExtended_LIB_TESTS
 ```
 
@@ -53,3 +53,4 @@ The adding of [submodules](https://git-scm.com/book/en/v2/Git-Tools-Submodules) 
 - [Mac, wchar issue](https://mhmethun.wordpress.com/2018/11/23/how-to-fix-c-cwchar-fatal-error-wchar-h-no-such-file-or-directory/)
 - [Unit testing harness](https://wingman-sw.com/articles/tdd-legacy-c)
 - [Doxygen](https://www.doxygen.nl/manual/docblocks.html)
+- [BDD Style testing with Catch2](http://www.electronvector.com/blog/using-catch-to-write-bdd-style-unit-tests-for-c)

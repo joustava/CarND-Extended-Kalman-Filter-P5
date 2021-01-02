@@ -9,8 +9,9 @@ FetchContent_MakeAvailable(Catch2)
 # Tests need to be added as executables first
 add_executable(${TEST_LIB_NAME}
   support.cpp
-  utils/cli_tests.cpp
   kalman/kalman_tests.cpp
+  utils/cli_tests.cpp
+  utils/bus_tests.cpp
   )
 # add_executable(${TEST_LIB_NAME}_utils
 #   support.cpp
@@ -27,4 +28,4 @@ target_link_libraries(${TEST_LIB_NAME} PRIVATE "${LIB_NAME}" Catch2::Catch2)
 # If you register a test, then ctest and make test will run it.
 # You can also run examples and check the output, as well.
 # this doesnt seem to work correctly with multiple tests?
-add_test(NAME ${TEST_LIB_NAME} COMMAND ${TEST_LIB_NAME}) # Command can be a target
+# add_test(NAME ${TEST_LIB_NAME} COMMAND ${TEST_LIB_NAME}) # Command can be a target
