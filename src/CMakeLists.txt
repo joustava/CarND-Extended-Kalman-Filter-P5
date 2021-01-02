@@ -22,8 +22,6 @@ add_library("${LIB_NAME}"
 # bin dir included to pick up generated version.h
 target_include_directories("${LIB_NAME}" PUBLIC ../include "${PROJECT_BINARY_DIR}/include")
 
-# This depends on (header only) boost
-#target_link_libraries("${LIB_NAME}" PRIVATE Boost::boost)
 # This depends on (header only) eigen
 target_link_libraries("${LIB_NAME}" Eigen3::Eigen)
 

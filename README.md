@@ -14,7 +14,7 @@
 In the root directory run
 
 ```bash
-cmake -S . -B build -DEigen3_DIR=(pwd)/extern/eigen/cmake
+cmake -S . -B build -DEigen3_DIR=(pwd)/extern/eigen/cmake -DuWS_DIR=(pwd)/extern/uWebSockets
 cmake --build build
 ```
 
@@ -34,13 +34,20 @@ or tests (needs build of test target)
 ## Dependencies
 
 - [Eigen](https://eigen.tuxfamily.org/dox-devel/index.html) as 'production' dependency
+<!-- - [uWebSockets](https://github.com/uNetworking/uWebSockets) as 'production' dependency -->
 - [Catch2](https://github.com/catchorg/Catch2.git) as testing/development dependency
 
-Eigen was added to the project by using `git submodule add https://gitlab.com/libeigen/eigen.git <external>` and then adding required config to `CMakeLists.txt`. See running section for making it available to build step.
+Eigen was added to the project by using `git submodule add https://gitlab.com/libeigen/eigen.git extern/eigen` and then adding required config to `CMakeLists.txt`. See running section for making it available to build step.
+
+<!-- uWebSockets was added to the project by using `git submodule add https://github.com/uNetworking/uWebSockets extern/uWebSockets` and then adding required config to `CMakeLists.txt`. See running section for making it available to build step. -->
 
 The adding of [submodules](https://git-scm.com/book/en/v2/Git-Tools-Submodules) after cloning is typically done once with `git submodule update --init` ran from the project root directory.
 
 [Catch2](https://github.com/catchorg/Catch2.git) is fetched automatically via the configuration supplied in `tests/CMakeLists.txt`
+
+
+
+
 
 ## Contributing
 

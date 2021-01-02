@@ -53,16 +53,19 @@ include(FetchContent)
 #   include(cmake/add_FetchContent_MakeAvailable.cmake)
 # endif()
 
-# Accumulator library
-# This is header only, so could be replaced with git submodules or FetchContent
-#find_package(Boost REQUIRED)
-# Adds Boost::boost
 
 # Eigen library
+# FetchContent_Declare(
+#   Eigen3
+#   GIT_REPOSITORY https://gitlab.com/libeigen/eigen.git
+#   GIT_TAG 3.3)
+# FetchContent_MakeAvailable(Eigen3)
 # This is header only, so could be replaced with git submodules or FetchContent
-find_package(Eigen3 3.3 REQUIRED)
+# but is included via a submodule at time of writing.
+# find_package(Eigen3 3.3 REQUIRED)
 # Adds Eigen3::Eigen
-
+# find_package(uWS 18.17.0 REQUIRED)
+# Adds uWS
 
 # Formatting library
 FetchContent_Declare(
@@ -72,11 +75,13 @@ FetchContent_Declare(
 FetchContent_MakeAvailable(fmtlib)
 # Adds fmt::fmt
 
-# The compiled library code is here
+add_subdirectory(extern/eigen)
+
+# The library code is here
 add_subdirectory(src)
 
-# The executable code is here
-# add_subdirectory(apps)
+# The application code is here
+add_subdirectory(apps)
 
 # Testing only available if this is the main app
 # Emergency override MODERN_CMAKE_BUILD_TESTING provided as well
