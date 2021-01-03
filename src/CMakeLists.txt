@@ -6,6 +6,9 @@
 set(
   HEADER_LIST 
   "${CMAKE_SOURCE_DIR}/include/utils/cli.hpp"
+  "${CMAKE_SOURCE_DIR}/include/FusionEKF.hpp"
+  "${CMAKE_SOURCE_DIR}/include/Tools.hpp"
+  "${CMAKE_SOURCE_DIR}/include/KalmanFilter.hpp"
   "${CMAKE_SOURCE_DIR}/include/kalman/filter.hpp"
 )
 
@@ -13,8 +16,10 @@ set(
 # Make an automatic library - will be static or dynamic based on user setting
 add_library("${LIB_NAME}"
   utils/cli.cpp
-  kalman/filter.cpp 
-  sensors/sampler.cpp
+  FusionEKF.cpp
+  Tools.cpp
+  KalmanFilter.cpp
+  kalman/filter.cpp
   ${HEADER_LIST}
 )
 

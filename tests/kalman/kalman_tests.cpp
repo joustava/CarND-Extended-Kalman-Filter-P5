@@ -26,7 +26,7 @@ TEST_CASE("Kalman Filter init for a simple 1D motion", "[kalman/filter]") {
     REQUIRE( k.get_P() == P );
 }
 
-TEST_CASE("Kalman Filter for a simple 1D motion", "[kalman/filter]") {
+TEST_CASE("Kalman Filter 1D cycle", "[kalman/filter]") {
     vector<VectorXd> measurements;
     // create a list of measurements
     VectorXd single_meas(1);
@@ -46,7 +46,11 @@ TEST_CASE("Kalman Filter for a simple 1D motion", "[kalman/filter]") {
     Kalman k = Kalman();
     k.init(x, P);
     
-    k.filter(measurements);
+    // filter cycle.
+    for (auto measurement: measurements) {
+        k.update(measurement);
+        k.predict();
+    }
 
     VectorXd x_expected = VectorXd(2);
     x_expected << 3.99967, 1;

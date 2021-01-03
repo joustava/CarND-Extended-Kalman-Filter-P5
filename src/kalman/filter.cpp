@@ -9,7 +9,8 @@ void Kalman::init(VectorXd &xi, MatrixXd &Pi) {
   u << 0, 0;
 
   F = MatrixXd(2, 2);
-  F << 1, 1, 0, 1;
+  F << 1, 1,
+       0, 1;
 
   H = MatrixXd(1, 2);
   H << 1, 0;
@@ -22,7 +23,8 @@ void Kalman::init(VectorXd &xi, MatrixXd &Pi) {
   I = MatrixXd::Identity(2, 2);
 
   Q = MatrixXd(2, 2);
-  Q << 0, 0, 0, 0;
+  Q << 0, 0, 
+       0, 0;
 }
 
 VectorXd Kalman::get_x() {
@@ -33,27 +35,22 @@ MatrixXd Kalman::get_P() {
   return P;
 }
 
-void Kalman::filter(vector<VectorXd> &measurements) {
-  for (unsigned int n = 0; n < measurements.size(); ++n) {
+void Kalman::predict() {
+  // 1. Predicted (a priori) state estimate 
+  x = (F * x) + u;
+  // 2. Predicted (a priori) estimate covariance 
+  P = F * P * F.transpose();
+}
 
-    VectorXd z = measurements[n];
-    
-    // UPDATE
-    // 1. Innovation or measurement pre-fit residual.
-    y = z - H * x;
-    // 2. Innovation (or pre-fit residual) covariance 
-    S = H * P * Ht + R;
-    // 3. Optimal Kalman gain
-    K = P * Ht * S.inverse();
-    // 4. Updated (a posteriori) state estimate 
-    x = x + (K * y);
-    // 5. Updated (a posteriori) estimate covariance 
-    P = (I - (K * H)) * P;
-    
-    // PREDICT
-    // 1. Predicted (a priori) state estimate 
-    x = (F * x) + u;
-    // 2. Predicted (a priori) estimate covariance 
-    P = F * P * F.transpose();
-  }
+void Kalman::update(const VectorXd &z) {
+  // 1. Innovation or measurement pre-fit residual.
+  y = z - H * x;
+  // 2. Innovation (or pre-fit residual) covariance 
+  S = H * P * Ht + R;
+  // 3. Optimal Kalman gain
+  K = P * Ht * S.inverse();
+  // 4. Updated (a posteriori) state estimate 
+  x = x + (K * y);
+  // 5. Updated (a posteriori) estimate covariance 
+  P = (I - (K * H)) * P;
 }

@@ -28,7 +28,8 @@ class Kalman {
 
   public:
   void init(VectorXd &x, MatrixXd &P);
-  void filter(vector<VectorXd> &measurements);
+  void predict();
+  void update(const VectorXd &z);
   VectorXd get_x();
   MatrixXd get_P();
 

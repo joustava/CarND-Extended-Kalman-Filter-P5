@@ -3,3 +3,7 @@ build
 docs
 ops
 .vscode
+
+# Ignoring these 
+extern/uSockets
+extern/uWebSockets
