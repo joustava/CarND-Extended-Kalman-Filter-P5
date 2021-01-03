@@ -1,0 +1,2 @@
+#!/bin/bash
+docker run -it --rm -p 4567:4567 --mount type=bind,source=$(pwd)/apps,target=/project/apps --mount type=bind,source=$(pwd)/src,target=/project/src --mount type=bind,source=$(pwd)/tests,target=/project/tests --mount type=bind,source=$(pwd)/include,target=/project/include --rm joustava/ekf bash

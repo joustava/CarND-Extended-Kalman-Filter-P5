@@ -6,6 +6,9 @@
 set(
   HEADER_LIST 
   "${CMAKE_SOURCE_DIR}/include/utils/cli.hpp"
+  "${CMAKE_SOURCE_DIR}/include/FusionEKF.hpp"
+  "${CMAKE_SOURCE_DIR}/include/Tools.hpp"
+  "${CMAKE_SOURCE_DIR}/include/KalmanFilter.hpp"
   "${CMAKE_SOURCE_DIR}/include/kalman/filter.hpp"
 )
 
@@ -13,8 +16,10 @@ set(
 # Make an automatic library - will be static or dynamic based on user setting
 add_library("${LIB_NAME}"
   utils/cli.cpp
-  kalman/filter.cpp 
-  sensors/sampler.cpp
+  FusionEKF.cpp
+  Tools.cpp
+  KalmanFilter.cpp
+  kalman/filter.cpp
   ${HEADER_LIST}
 )
 
@@ -22,8 +27,6 @@ add_library("${LIB_NAME}"
 # bin dir included to pick up generated version.h
 target_include_directories("${LIB_NAME}" PUBLIC ../include "${PROJECT_BINARY_DIR}/include")
 
-# This depends on (header only) boost
-#target_link_libraries("${LIB_NAME}" PRIVATE Boost::boost)
 # This depends on (header only) eigen
 target_link_libraries("${LIB_NAME}" Eigen3::Eigen)
 

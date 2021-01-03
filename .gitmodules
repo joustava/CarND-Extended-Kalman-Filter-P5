@@ -1,3 +1,9 @@
 [submodule "extern/eigen"]
 	path = extern/eigen
 	url = https://gitlab.com/libeigen/eigen.git
+[submodule "extern/uWebSockets"]
+	path = extern/uWebSockets
+	url = https://github.com/uNetworking/uWebSockets.git
+[submodule "extern/uSockets"]
+	path = extern/uSockets
+	url = https://github.com/uNetworking/uSockets.git

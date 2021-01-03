@@ -3,7 +3,7 @@ cmake_minimum_required(VERSION 3.19)
 
 # Project name and a few useful settings. Other commands can pick up the results
 project(
-  KalmanExtended
+  ExtendedKF
   VERSION 0.0.4
   DESCRIPTION "An example project with CMake"
   LANGUAGES CXX)
@@ -31,52 +31,35 @@ if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
   # Let's nicely support folders in IDEs
   set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 
-  # Testing only available if this is the main app
-  # Note this needs to be done in the main CMakeLists
-  # since it calls enable_testing, which must be in the
-  # main CMakeLists.
-  include(CTest)
 
-  # Docs only available if this is the main app
-  find_package(Doxygen)
-  if(Doxygen_FOUND)
-    add_subdirectory(docs)
-  else()
-    message(STATUS "Doxygen not found, not building docs")
-  endif()
 endif()
 
 # FetchContent added in CMake 3.11, downloads during the configure step
 include(FetchContent)
-# # FetchContent_MakeAvailable was not added until CMake 3.14; use our shim
-# if(${CMAKE_VERSION} VERSION_LESS 3.14)
-#   include(cmake/add_FetchContent_MakeAvailable.cmake)
-# endif()
 
-# Accumulator library
-# This is header only, so could be replaced with git submodules or FetchContent
-#find_package(Boost REQUIRED)
-# Adds Boost::boost
-
-# Eigen library
-# This is header only, so could be replaced with git submodules or FetchContent
-find_package(Eigen3 3.3 REQUIRED)
-# Adds Eigen3::Eigen
-
-
-# Formatting library
+# nlohmann/json
 FetchContent_Declare(
-  fmtlib
-  GIT_REPOSITORY https://github.com/fmtlib/fmt.git
-  GIT_TAG 5.3.0)
-FetchContent_MakeAvailable(fmtlib)
-# Adds fmt::fmt
+  json
+  GIT_REPOSITORY https://github.com/ArthurSonzogni/nlohmann_json_cmake_fetchcontent
+  GIT_TAG v3.9.1
+)
 
-# The compiled library code is here
+FetchContent_GetProperties(json)
+if(NOT json_POPULATED)
+  FetchContent_Populate(json)
+  add_subdirectory(${json_SOURCE_DIR} ${json_BINARY_DIR} EXCLUDE_FROM_ALL)
+endif()
+
+
+# Eigen library supports cmake (cannot get FetchContent working at this time)
+# Included via gti submodule.
+add_subdirectory(extern/eigen)
+
+# The library code is here
 add_subdirectory(src)
 
-# The executable code is here
-# add_subdirectory(apps)
+# The application code is here
+add_subdirectory(apps)
 
 # Testing only available if this is the main app
 # Emergency override MODERN_CMAKE_BUILD_TESTING provided as well
