@@ -6,10 +6,10 @@
 set(
   HEADER_LIST 
   "${CMAKE_SOURCE_DIR}/include/utils/cli.hpp"
+  "${CMAKE_SOURCE_DIR}/include/utils/MeasurementPackage.hpp"
   "${CMAKE_SOURCE_DIR}/include/FusionEKF.hpp"
   "${CMAKE_SOURCE_DIR}/include/Tools.hpp"
   "${CMAKE_SOURCE_DIR}/include/KalmanFilter.hpp"
-  "${CMAKE_SOURCE_DIR}/include/kalman/filter.hpp"
 )
 
 
@@ -19,7 +19,6 @@ add_library("${LIB_NAME}"
   FusionEKF.cpp
   Tools.cpp
   KalmanFilter.cpp
-  kalman/filter.cpp
   ${HEADER_LIST}
 )
 

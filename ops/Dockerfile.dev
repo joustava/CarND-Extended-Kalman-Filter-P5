@@ -12,7 +12,19 @@ FROM archlinux
 
 RUN pacman -Syyu --noconfirm
 RUN pacman-db-upgrade
-RUN pacman -S --noconfirm git libuv openssl gcc cmake make
+RUN pacman -S --noconfirm \
+  git \
+  libuv \
+  openssl \
+  gcc \
+  cmake \
+  make \
+  boost \
+  fftw \
+  freeglut \
+  gcc-fortran \
+  suitesparse
+# qt4 \
 
 WORKDIR /deps
 
@@ -31,7 +43,7 @@ COPY . .
 RUN cmake -S . -B build
 RUN cmake --build build
 
-CMD [ "./bin/ExtendedKF_LIB_TESTS" ]
+CMD [ "./bin/ExtendedKF_APP" ]
 
 
 

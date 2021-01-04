@@ -11,7 +11,15 @@
 
 ## Build and Run
 
-In the root directory run
+*Docker*
+
+The project needs to be run in a docker container.
+To build the image run `docker build -t joustava/ekf -f ./ops/Dockerfile.dev .`
+Then the project can be run with `./run.sh`, this will start a cli in the running container
+where the command `./bin/ExtendedKF_APP` will run the server on port 4567.
+
+
+In the docker container root directory run
 
 ```bash
 cmake -S . -B build #-DEigen3_DIR=(pwd)/extern/eigen/cmake -DuWS_DIR=(pwd)/extern/uWebSockets
@@ -21,20 +29,21 @@ cmake --build build
 then either run executable
 
 ```bash
-./bin/KalmanExtended_APP
+./bin/ExtendedKF_APP
 ```
 
 or tests (needs build of test target)
 
 ```bash
 # Is this needed? cmake --build build --target test
-./bin/KalmanExtended_LIB_TESTS
+./bin/ExtendedKF_LIB_TESTS
 ```
 
 ## Dependencies
 
 - [Eigen](https://eigen.tuxfamily.org/dox-devel/index.html) as 'production' dependency
 - [uWebSockets](https://github.com/uNetworking/uWebSockets) as 'production' dependency
+- [nlohmann_json](https://github.com/nlohmann/json) as 'production' dependency
 - [Catch2](https://github.com/catchorg/Catch2.git) as testing/development dependency
 
 Eigen was added to the project by using `git submodule add https://gitlab.com/libeigen/eigen.git extern/eigen` and then adding required config to `./CMakeLists.txt`. See running section for making it available to build step.
@@ -45,13 +54,16 @@ The adding of [submodules](https://git-scm.com/book/en/v2/Git-Tools-Submodules) 
 
 [Catch2](https://github.com/catchorg/Catch2.git) is fetched automatically via the configuration supplied in `tests/CMakeLists.txt`
 
+[nlohmann_json](https://github.com/nlohmann/json) is fetched automatically via the configuration supplied in `./CMaleLists.txt`, to keep size small the [lightweight tracking repo](https://github.com/ArthurSonzogni/nlohmann_json_cmake_fetchcontent) is used as source.
 
+[uWebSockets](https://github.com/uNetworking/uWebSockets) is added into to the docker image via git. A really old
+version is used that had CMake support and is the version used in the template repo.
 
-
+Note that there are 2 additional git submodules configured: uWebSockets and uSockets, which I'd like to use at a later stage to update these to current versions in a nicer and managable (CMake?) way.
 
 ## Contributing
 
-We follow the [Google C++ Style Guide](https://google.github.io/styleguide/cppguide.html) as close as possible and use [clang-format](https://clang.llvm.org/docs/ClangFormat.html) to validate our code accordingly.
+We try follow the [Google C++ Style Guide](https://google.github.io/styleguide/cppguide.html) as close as possible and use [clang-format](https://clang.llvm.org/docs/ClangFormat.html) to validate our code accordingly.
 
 Tests live in `./tests` folder and we aim to not reduce coverage so please add tests for your code or changes.
 

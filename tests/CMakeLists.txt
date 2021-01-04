@@ -11,10 +11,6 @@ add_executable(${TEST_LIB_NAME}
   support.cpp
   FusionEKF_tests.cpp
   Tools_tests.cpp
-  KalmanFilter_tests.cpp
-  kalman/kalman_tests.cpp
-  # utils/cli_tests.cpp
-
 )
 
 # I'm using C++17 in the test

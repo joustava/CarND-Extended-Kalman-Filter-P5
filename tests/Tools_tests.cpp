@@ -39,7 +39,7 @@ TEST_CASE("CalculateRMSE", "[Tools]") {
 }
 
 
-TEST_CASE("CalculateJacobian", "[TOOLS]") {
+TEST_CASE("CalculateJacobian", "[Tools]") {
     Tools tools;    
     Eigen::VectorXd x_predicted(4);
     x_predicted << 1, 2, 0.2, 0.4;

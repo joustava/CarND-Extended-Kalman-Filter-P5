@@ -1,17 +1,16 @@
 #include "Tools.hpp"
 #include <iostream>
 
-using Eigen::VectorXd;
 using Eigen::MatrixXd;
-using std::vector;
+using Eigen::VectorXd;
 
 Tools::Tools() {}
 
 Tools::~Tools() {}
 
-VectorXd Tools::CalculateRMSE(const vector<VectorXd> &estimations,
-                              const vector<VectorXd> &ground_truth) {
-  Eigen::VectorXd rmse(4);
+VectorXd Tools::CalculateRMSE(const std::vector<VectorXd> &estimations,
+                              const std::vector<VectorXd> &ground_truth) {
+  VectorXd rmse(4);
   rmse << 0,0,0,0;
 
   if (estimations.empty()) {
@@ -24,7 +23,7 @@ VectorXd Tools::CalculateRMSE(const vector<VectorXd> &estimations,
   }
 
   for (int i=0; i < estimations.size(); ++i) {      
-    Eigen::VectorXd residual = estimations[i] - ground_truth[i];
+    VectorXd residual = estimations[i] - ground_truth[i];
     residual = residual.array() * residual.array();
     rmse += residual;
   }
@@ -34,26 +33,37 @@ VectorXd Tools::CalculateRMSE(const vector<VectorXd> &estimations,
   return rmse;
 }
 
-MatrixXd Tools::CalculateJacobian(const VectorXd& x_state) {
+MatrixXd Tools::CalculateJacobian(const VectorXd &x_state) {
   MatrixXd Hj(3,4);
-  
-  float px = x_state(0);
-  float py = x_state(1);
-  float vx = x_state(2);
-  float vy = x_state(3);
 
-  // check division by zero
-  if(px == 0 && py == 0) {
-      std::cout << "Error" << std::endl;
-      return Hj;
-  }
-  // compute the Jacobian matrix
-  float total = pow(px, 2) + pow(py, 2);
-  float sqr   = sqrt(total);
+  float p_x = x_state(0);
+  float p_y = x_state(1);
+  float v_x = x_state(2);
+  float v_y = x_state(3);
   
-  Hj << px/sqr,     py/sqr  , 0, 0,
-        -py/total, px/total, 0, 0,
-        py * (vx * py - vy * px)/pow(total, 3.0/2.0), px * (vy * px - vx * py)/pow(total, 3.0/2.0), px/sqr, py/sqr;
+  float c1 = p_x * p_x + p_y * p_y;
+  float c2 = sqrt(c1);
+  float c3 = c1 * c2;
+  
+  Hj << (p_x/c2), (p_y/c2), 0, 0,
+        -(p_y/c1), (p_x/c1), 0, 0,
+        p_y*(v_x*p_y - v_y*p_x)/c3, p_x*(p_x*v_y - p_y*v_x)/c3, p_x/c2, p_y/c2;
   
   return Hj;
+}
+
+VectorXd Tools::ConvertCartesianToPolar(const VectorXd &x_state) {
+    float p_x = x_state[0];
+    float p_y = x_state[1];
+    float v_x = x_state[2];
+    float v_y = x_state[3];
+    
+    float rho = sqrt(p_x * p_x + p_y * p_y);
+    float phi = atan2(p_y, p_x);
+    float rho_dot = (p_x * v_x + p_y * v_y) / rho;
+    
+    VectorXd z = VectorXd(3);
+    z << rho, phi, rho_dot;
+    
+    return z;
 }
